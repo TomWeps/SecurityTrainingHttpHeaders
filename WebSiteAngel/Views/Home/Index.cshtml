@@ -11,6 +11,10 @@
     <li>X-Frame-Options <a asp-controller="Home" asp-action="XFrameOptions">XFrameOptions</a></li>  
     <li>X-Content-Type: nosniff</li>
     <li>X-XSS-Protection <a href="/Home/XSSProtection?user=test<script>alert('you have been hacked');<%2Fscript>">XSSProtection</a></li>
-    <li>Content-Security-Policy (CSP)</li>
+    <li>Content-Security-Policy (CSP)
+    <a asp-controller="Csp" asp-action="Off">Off</a>
+    <a asp-controller="Csp" asp-action="Off">On</a>
+    </li>
+    <li>Strict-Transport-Security</li>
     <li>XSSI ??</li>
 </ul>
