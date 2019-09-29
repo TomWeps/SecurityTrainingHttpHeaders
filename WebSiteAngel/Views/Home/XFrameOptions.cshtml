@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+<div class="text-center">
+    <h1>Angel</h1>
+    <p><button onclick="authenticateCookie()">Authenticate Cookie</button></p>
+    <p><button onclick="getSecret()">Get Secret</button></p>
+    <p><button onclick="topSecretCommand()">Execute Secret Command</button></p>
+     <div id="content"></div>
+</div>
+
+@section Scripts
+{
+
+<script type="text/javascript">
+    var apiUriBase = 'https://localhost:5001/api/'
+
+    function showMessage(xhr) {
+        var contentElement = document.getElementById('content');
+        contentElement.innerHTML = xhr.responseText;
+    }
+
+    function authenticateCookie() {
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+        xhr.addEventListener('load', function() {
+            showMessage(this);
+        });
+        xhr.open('POST', apiUriBase + 'cors/SignInCookie');
+        xhr.send();
+        return false;
+    }
+
+    function getSecret() {
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+        xhr.addEventListener('load', function(){
+            showMessage(this);
+        });
+        xhr.open('GET', apiUriBase + 'cors/GetSecret');
+        xhr.send();
+        return false;
+    }
+
+    function topSecretCommand() {
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+        xhr.addEventListener('load', function(){
+            showMessage(this);
+        });
+        xhr.open('POST', apiUriBase + 'XFrame/ExecuteSecretCommand');
+        xhr.send();
+        return false;
+    }
+
+</script>
+
+}

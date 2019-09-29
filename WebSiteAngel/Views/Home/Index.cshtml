@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1>Angel</h1>
+</div>
+
+<ul>
+    <li>CORS: TO DO</li>
+    <li>X-Frame-Options <a asp-controller="Home" asp-action="XFrameOptions">XFrameOptions</a></li>  
+    <li>X-Content-Type: nosniff</li>
+    <li>X-XSS-Protection <a href="/Home/XSSProtection?user=test<script>alert('you have been hacked');<%2Fscript>">XSSProtection</a></li>
+    <li>Content-Security-Policy (CSP)</li>
+    <li>XSSI ??</li>
+</ul>
