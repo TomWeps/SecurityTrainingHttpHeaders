@@ -8,6 +8,11 @@ namespace WebSiteAngel.Controllers
 {
     public class CspController : Controller
     {
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         public IActionResult On()
         {
             const string contentPolicy = "default-src 'none'; " +
@@ -27,7 +32,7 @@ namespace WebSiteAngel.Controllers
         private IActionResult GenerateView(string title)
         {
             ViewData["Title"] = "CSP";
-            return View("Index");
+            return View("Demo");
         }
     }
 }

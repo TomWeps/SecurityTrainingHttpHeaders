@@ -10,12 +10,17 @@ namespace WebSiteAngel.Controllers
     {
         const string apiBaseUri = "https://localhost:5001/api/XContentType/";
 
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         public IActionResult Example1()
         {
             ViewData["Title"] = "1: sniff";
             ViewData["ScriptSrc"] = $"{apiBaseUri}sniff";
 
-            return View("Index");
+            return View("Demo");
         }
 
         public IActionResult Example2()
@@ -23,7 +28,7 @@ namespace WebSiteAngel.Controllers
             ViewData["Title"] = "2: NO sniff";
             ViewData["ScriptSrc"] = $"{apiBaseUri}NoSniff";
 
-            return View("Index");
+            return View("Demo");
         }
 
         public IActionResult Example3()
@@ -31,7 +36,7 @@ namespace WebSiteAngel.Controllers
             ViewData["Title"] = "2: MimeType";
             ViewData["ScriptSrc"] = $"{apiBaseUri}Mime";
 
-            return View("Index");
+            return View("Demo");
         }
     }
 }

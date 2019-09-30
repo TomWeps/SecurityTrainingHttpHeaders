@@ -15,22 +15,6 @@ namespace WebSiteAngel.Controllers
             return View();
         }
 
-        public IActionResult XFrameOptions()
-        {
-            Response.Headers.Add("X-Frame-Options", "deny");
-            return View();
-        }
-
-        public IActionResult XSSProtection(string user)
-        {            
-            //Response.Headers.Add"X-XSS-Protection", "0");
-            Response.Headers.Add("X-XSS-Protection", "1; mode=block");
-
-            ViewData["user"] = user;
-
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

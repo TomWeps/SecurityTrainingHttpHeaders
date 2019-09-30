@@ -1,0 +1,19 @@
+﻿
+
+
+    <h1>XSSProtection Demo</h1>
+
+    <ul>
+        <li>
+            <a href="/xss/XSSProtectionOff?user=Frank Sinatra">Example: Frank Sinatra</a>
+        </li>
+        <li>
+            <a href="/xss/XSSProtectionOff?user=test<script>alert('you have been hacked');<%2Fscript>">XSSProtection OFF</a>
+        </li>
+        <li>
+            <a href="/xss/XSSProtectionOn?user=test<script>alert('you have been hacked');<%2Fscript>">XSSProtection ON</a>
+        </li>
+    </ul>    
+
+        
+    

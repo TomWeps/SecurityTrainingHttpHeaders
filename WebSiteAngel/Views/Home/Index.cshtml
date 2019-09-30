@@ -8,20 +8,10 @@
 
 <ul>
     <li>CORS: TO DO</li>
-    <li>X-Frame-Options <a asp-controller="Home" asp-action="XFrameOptions">XFrameOptions</a></li>  
-    <li>
-        X-Content-Type: nosniff
-        <a asp-controller="ContentType" asp-action="Example1">Example1</a>
-        <a asp-controller="ContentType" asp-action="Example2">Example2</a>
-        <a asp-controller="ContentType" asp-action="Example3">Example3</a>
-    </li>
-    <li>X-XSS-Protection 
-    
-    <a href="/Home/XSSProtection?user=test<script>alert('you have been hacked');<%2Fscript>">XSSProtection</a></li>
-    <li>Content-Security-Policy (CSP)
-    <a asp-controller="Csp" asp-action="Off">Off</a>
-    <a asp-controller="Csp" asp-action="Off">On</a>
-    </li>
+    <li><a asp-controller="Frame" asp-action="Index">X-Frame-Options</a></li>  
+    <li><a asp-controller="ContentType" asp-action="Index">X-Content-Type: nosniff</a></li>
+    <li><a asp-controller="Xss" asp-action="Index" > X-XSS-Protection</a></li>
+    <li><a asp-controller="Csp" asp-action="Index"> Content-Security-Policy (CSP)</a></li>
     <li>Strict-Transport-Security</li>
     <li>XSSI ??</li>
 </ul>

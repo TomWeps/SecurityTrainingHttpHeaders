@@ -1,0 +1,20 @@
+﻿
+@{    
+    var uriDeny = @HtmlEncoder.Encode("http://angel.local/frame/XFrameOptionsDeny");
+    var uriNoDeny = @HtmlEncoder.Encode("http://angel.local/frame/XFrameOptionsNoDeny");
+    var uriDevil = "http://devil.local/Clickjacking?dstUri=";
+    var uriExample1 = $"{uriDevil}{uriNoDeny}";
+    var uriExample2 = $"{uriDevil}{uriDeny}";
+}
+
+    <h1>X-Frame-Options</h1>
+
+<ul>
+    <li>
+        <a href="@uriExample1" target="_blank" >Example 1</a>        
+    </li>
+    <li>
+        <a href="@uriExample2" target="_blank" >Example 2</a>
+    </li>
+</ul>
+
