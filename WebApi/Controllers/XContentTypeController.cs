@@ -10,41 +10,32 @@ namespace WebApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class XContentTypeController : ControllerBase
-    {          
-        [HttpGet(template: nameof(MimeConfusionAttack))]
-        public ActionResult<PersonDto[]> MimeConfusionAttack()
+    {
+        [HttpGet(template: nameof(Sniff))]
+        public IActionResult Sniff()
         {
-            Response.Headers.Add("X-Content-Type-Options", "nosniff");
-
-            string tokenValue;
-            Request.Cookies.TryGetValue("Token", out tokenValue);
-
-            //if (tokenValue == "SecretToken")
-            {
-                var restult = new PersonDto[]
-                {
-                    new PersonDto
-                    {
-                        Id = 1,
-                        Name = "Secret John"
-                    },
-                    new PersonDto
-                    {
-                        Id = 2,
-                        Name = "Secret William"
-                    }
-                };
-
-                return Ok(restult);
-            }
-
-            return Unauthorized("Unauthorized");
+            return Picture();
         }
 
-        public class PersonDto
+        [HttpGet(template: nameof(NoSniff))]
+        public IActionResult NoSniff()
         {
-            public int Id { get; set; }
-            public string Name { get; set; }
+            Response.Headers.Add("X-Content-Type-Options", "nosniff");
+            return Picture();
+        }
+
+        [HttpGet(template: nameof(Mime))]
+        public IActionResult Mime()
+        {
+            Response.Headers.Add("Content-Type", "text/plain");
+            //Response.Headers.Add("X-Content-Type-Options", "nosniff");
+            return Picture();
+        }
+
+        private IActionResult Picture()
+        {
+            string fileContent = "alert(\"you've been hacked\");";
+            return Ok(fileContent);
         }
     }    
 }
