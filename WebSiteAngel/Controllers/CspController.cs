@@ -17,7 +17,8 @@ namespace WebSiteAngel.Controllers
         {
             const string contentPolicy = "default-src 'none'; " +
                 "style-src angel.local; " +
-                "script-src angel.local;";
+                "script-src angel.local;" +
+                "report-uri http://localhost:5000/api/CspReport;";
 
             Response.Headers.Add("Content-Security-Policy", contentPolicy);
 
