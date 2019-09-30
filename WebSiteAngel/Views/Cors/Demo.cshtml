@@ -1,0 +1,47 @@
+﻿
+<div class="text-left">
+    <p><button onclick="authenticateCookie()">Authenticate Cookie</button></p>
+    <p><button onclick="getSecret('WithoutCors', false)">Get Secret - WithoutCors</button></p>
+    <p><button onclick="getSecret('AllowOriginWildCard', false)">Get Secret - AllowOriginWildCard</button></p>
+    <p><button onclick="getSecret('AllowOriginWildCard', true)">Get Secret - AllowOriginWildCard + WithCredentials</button></p>
+    <p><button onclick="getSecret('AllowCredentials', true)">Get Secret - AllowCredentials</button></p>
+    <p><button onclick="getSecret('AllowAngelsOnly', true)">Get Secret - AllowAngelsOnly</button></p>
+    <div id="content"></div>
+</div>
+
+@section Scripts
+{
+
+    <script type="text/javascript">
+        var apiUriBase = 'https://localhost:5001/api/';
+
+        function showMessage(xhr) {
+            var contentElement = document.getElementById('content');
+            contentElement.innerHTML = xhr.responseText;
+        }
+
+        function authenticateCookie() {
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+            xhr.addEventListener('load', function () {
+                showMessage(this);
+            });
+            xhr.open('POST', apiUriBase + 'auth/SignInCookie');
+            xhr.send();
+            return false;
+        }
+
+        function getSecret(actionName, withCredentials) {
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = withCredentials;
+            xhr.addEventListener('load', function () {
+                showMessage(this);
+            });
+            xhr.open('POST', apiUriBase + 'cors/' + actionName);
+            xhr.send();
+            return false;
+        }
+
+    </script>
+
+}

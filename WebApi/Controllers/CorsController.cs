@@ -5,45 +5,68 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Utilities;
 
 namespace WebApi.Controllers
 {
-    //[EnableCors("OnlyAngel")]
-    //[EnableCors("AnyOrigin")]
-    //[EnableCors("AnyOriginWithoutCredentials")]
+    [DisableCors()]    
     [Route("api/[controller]")]
     [ApiController]
     public class CorsController : ControllerBase
-    {        
-        [HttpPost(template:nameof(SignInCookie))]        
-        public ActionResult<string> SignInCookie()
+    {
+        /*
+        [HttpOptions(template: nameof(GetSecretOptions))]
+        public ActionResult<string> GetSecretOptions()
         {
-            var cookieOptions = new CookieOptions
-            {                
-                HttpOnly = false,
-                Secure = false,
-                Path = "/",
-                IsEssential = true,
-                MaxAge = TimeSpan.FromMinutes(10.0),
-                SameSite = SameSiteMode.None
-            };
-            
-            Response.Cookies.Append("Token", "SecretToken", cookieOptions);
-            return Ok("The secret token is saved in the cookie");
+            return Ok("");
+        }
+        */
+
+        [HttpPost(template:nameof(WithoutCors))]        
+        public ActionResult<string> WithoutCors()
+        {
+            return Ok("SecretValue - WithoutCors");            
         }
 
-        [HttpGet(template:nameof(GetSecret))]        
-        public ActionResult<string> GetSecret()
+        [HttpPost(template: nameof(AllowOriginWildCard))]
+        public ActionResult<string> AllowOriginWildCard()
         {
-            string tokenValue;
-            Request.Cookies.TryGetValue("Token", out tokenValue);
+            Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            return Ok("SecretValue - AllowOriginWildCard");
+        }
 
-            if(tokenValue == "SecretToken")
+        [HttpPost(template: nameof(AllowCredentials))]
+        public ActionResult<string> AllowCredentials()
+        {
+            string origin = Request.Headers["origin"];
+            Response.Headers.Add("Access-Control-Allow-Origin", origin);
+            Response.Headers.Add("Access-Control-Allow-Credentials", "true");
+
+            if (AuthHelper.IsAuthenticated(Request))
             {
-                return Ok("SecretValue");
+                return Ok("SecretValue - AllowCredentials");
+            }
+
+            return Unauthorized("Unauthorized");            
+        }
+
+        [HttpPost(template: nameof(AllowAngelsOnly))]
+        public ActionResult<string> AllowAngelsOnly()
+        {
+            string origin = Request.Headers["origin"];
+            Response.Headers.Add("Access-Control-Allow-Origin", "http://angel.local");
+            Response.Headers.Add("Access-Control-Allow-Credentials", "true");
+
+            if (AuthHelper.IsAuthenticated(Request))
+            {
+                return Ok("SecretValue - AllowAngelsOnly");
             }
 
             return Unauthorized("Unauthorized");
         }
+
+
     }
 }
+
+ 

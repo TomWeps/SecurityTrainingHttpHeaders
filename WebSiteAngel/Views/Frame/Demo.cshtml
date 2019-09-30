@@ -23,7 +23,7 @@
         xhr.addEventListener('load', function() {
             showMessage(this);
         });
-        xhr.open('POST', apiUriBase + 'cors/SignInCookie');
+        xhr.open('POST', apiUriBase + 'auth/SignInCookie');
         xhr.send();
         return false;
     }

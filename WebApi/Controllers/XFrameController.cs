@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Utilities;
 
 namespace WebApi.Controllers
 {
@@ -14,10 +15,7 @@ namespace WebApi.Controllers
         [HttpPost(template: nameof(ExecuteSecretCommand))]
         public ActionResult<string> ExecuteSecretCommand()
         {
-            string tokenValue;
-            Request.Cookies.TryGetValue("Token", out tokenValue);
-
-            if (tokenValue == "SecretToken")
+            if (AuthHelper.IsAuthenticated(Request))
             {
                 return Ok("Secret Command was executed");
             }

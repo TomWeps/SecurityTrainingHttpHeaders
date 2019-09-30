@@ -27,6 +27,7 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            /*
             services.AddCors(optins =>
             {
                 optins.AddPolicy("OnlyAngel", policy =>
@@ -52,7 +53,7 @@ namespace WebApi
                     .AllowAnyHeader();             
                 });
             });
-
+            */
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -68,19 +69,9 @@ namespace WebApi
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-
-            app.UseHttpsRedirection();
-            app.UseCors("OnlyAngel");
+        {           
+            app.UseDeveloperExceptionPage();                      
+            //app.UseCors("OnlyAngel");
             app.UseCookiePolicy();            
             app.UseMvc();
         }
