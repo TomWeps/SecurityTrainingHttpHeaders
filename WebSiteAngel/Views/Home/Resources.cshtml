@@ -1,0 +1,16 @@
+﻿
+@{
+    string[] uriList = new[]
+    {
+        "https://infosec.mozilla.org/guidelines/web_security.html"
+    };
+}
+
+<h1>Resources</h1>
+<ul>
+    @foreach (string uri in uriList)
+    {
+      <li><a href="@uri" target="_blank">@uri</a></li>
+    }
+</ul>
+

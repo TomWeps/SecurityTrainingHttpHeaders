@@ -1,7 +1,6 @@
 ﻿
 <div class="text-left">    
-    <p><button onclick="authenticateCookie()">Authenticate Cookie</button></p>
-    <p><button onclick="getSecret()">Get Secret</button></p>
+    <p><button onclick="authenticateCookie()">Authenticate Cookie</button></p>    
     <p><button onclick="topSecretCommand()">Execute Secret Command</button></p>
      <div id="content"></div>
 </div>
@@ -24,17 +23,6 @@
             showMessage(this);
         });
         xhr.open('POST', apiUriBase + 'auth/SignInCookie');
-        xhr.send();
-        return false;
-    }
-
-    function getSecret() {
-        var xhr = new XMLHttpRequest();
-        xhr.withCredentials = true;
-        xhr.addEventListener('load', function(){
-            showMessage(this);
-        });
-        xhr.open('GET', apiUriBase + 'cors/GetSecret');
         xhr.send();
         return false;
     }

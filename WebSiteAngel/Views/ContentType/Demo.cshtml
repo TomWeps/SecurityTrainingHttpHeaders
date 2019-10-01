@@ -1,3 +1,13 @@
 ﻿
 <h1>@ViewData["Title"]</h1>
 <script type="text/javascript" src="@ViewData["ScriptSrc"]"></script>
+
+<h2>Page's content</h2>
+<p>
+    <code>
+        @Html.Raw(Html.Encode($"<script type=\"text/javascript\" src=\"{ViewData["ScriptSrc"]}\"></script>"))
+    </code>
+</p>
+<p>
+    ResponseHeaders: @ViewData["ResponseHeaders"]
+</p>

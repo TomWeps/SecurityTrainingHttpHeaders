@@ -19,6 +19,7 @@ namespace WebSiteAngel.Controllers
         {
             ViewData["Title"] = "1: sniff";
             ViewData["ScriptSrc"] = $"{apiBaseUri}sniff";
+            ViewData["ResponseHeaders"] = "Content-Type: text/plain;";
 
             return View("Demo");
         }
@@ -27,6 +28,7 @@ namespace WebSiteAngel.Controllers
         {
             ViewData["Title"] = "2: NO sniff";
             ViewData["ScriptSrc"] = $"{apiBaseUri}NoSniff";
+            ViewData["ResponseHeaders"] = "Content-Type: text/plain;  + X-Content-Type-Options: nosniff";
 
             return View("Demo");
         }

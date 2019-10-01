@@ -1,4 +1,15 @@
 ﻿
-    <h1>Referrer Policy: @ViewData["Referrer"]</h1>
+<h1>Referrer Policy: @ViewData["Referrer"]</h1>
 
-<img src="http://devil.local/referer" />
+<div>
+    <img src="http://devil.local/referer" />
+</div>
+<p>
+    Page Source Code:
+    <div>
+        <code>
+            @Html.Raw(Html.Encode("<img src=\"http://devil.local/referer\" />"))
+        </code>
+    </div>
+</p>
+
