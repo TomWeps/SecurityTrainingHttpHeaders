@@ -7,3 +7,38 @@
 </ul>
 
 
+<article>
+
+    Same-Origin Policy (SOP)
+    An important concept in application security that involves a large group of client-side scripting languages.
+    https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy
+
+    Cross-Origin Resource Sharing(CORS) is a mechanism that enables web browsers to perform cross-domain requests using the XMLHttpRequest API in a controlled manner.
+
+    KEY CORS HEADERS
+    Access-Control-Allow-Origin specifies which domains can access a domain’s resources. For instance, if requester.com want to access provider.com’s resources, then developers can use this header to securely grant requester.com access to provider.com’s resources.
+    Access-Control-Allow-Credentials specifies whether or not the browser will send cookies with the request. Cookies will only be sent if the allow-credentials header is set to true.
+    Access-Control-Allow-Methods specifies which HTTP request methods (GET, PUT, DELETE, etc.) can be used to access resources. This header lets developers further enhance security by specifying what methods are valid when requester.com requests access to provider.com’s resources.
+
+    Pitfalls
+    - Thinking of CORS, like a the Server Side "Access Control List"
+    - Victim’s browser as a proxy to bypass IP-based authentication and access intranet application
+    - Misconfiguration (for example:,
+    wildcard * operator for Access-Control-Allow-Origin
+    (broken) regex for checking origin header
+    just copying origin
+    - ‘null’ origin
+    - Breaking HTTPS (httpS web site, is accepting http origin - man in the middle)
+    - Client-Side cache poisoning ( reflected XSS Attack )
+    - Server-side cache poisoning ( stored XSS vulnerability )
+
+
+
+    Links:
+    https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+    https://portswigger.net/research/exploiting-cors-misconfigurations-for-bitcoins-and-bounties
+    https://ejj.io/misconfigured-cors/
+    https://www.bedefended.com/papers/cors-security-guide
+    https://www.moesif.com/blog/technical/cors/Authoritative-Guide-to-CORS-Cross-Origin-Resource-Sharing-for-REST-APIs/
+
+</article>

@@ -6,3 +6,37 @@
     <li><a asp-controller="ContentType" asp-action="Example2">Example2</a></li>
 </ul>
 
+<article>
+    Setting a server's X-Content-Type-Options HTTP response header to nosniff instructs browsers to disable 
+    <a href="https://en.wikipedia.org/wiki/Content_sniffing">content or MIME sniffing</a> which is used to override response Content-Type headers to guess and process the data using an implicit content type.
+
+
+    nosniff
+
+    Blocks a request if the request destination is of type
+    <ul>
+        <li>"style" and the MIME type is not text/css, or</li>
+        <li>"script" and the MIME type is not a JavaScript MIME type</li>
+    </ul>
+
+    Enables Cross-Origin Read Blocking for the MIME-types
+    <ul>
+        <li>text/html</li>
+        <li>text/plain</li>
+        <li>text/json, application/json or any other type with a JSON extension: */*+json</li>
+        <li>text/xml, application/xml or any other type with an XML extension: */*+xml (excluding image/svg+xml)</li>
+    </ul>
+
+    Pitfalls
+    MIME Confusion Attack - enables attacks via user generated content sites by allowing users uploading malicious code that is then executed by browsers which will interpret the files using alternate content type
+    Unauthorized Hotlinking - By hotlinking to sites with resources for one purpose, e.g. viewing, apps can rely on content-type sniffing and generate a lot of traffic on sites for another purpose where it may be against their terms of service, e.g. GitHub displays JavaScript code for viewing
+
+    Links:
+    https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options
+    https://stackoverflow.com/questions/18337630/what-is-x-content-type-options-nosniff
+    https://whitton.io/articles/xss-on-facebook-via-png-content-types/
+
+
+
+
+</article>
