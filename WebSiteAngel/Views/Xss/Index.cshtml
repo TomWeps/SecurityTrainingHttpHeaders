@@ -1,30 +1,53 @@
 ﻿
     <h1>X-XSS-Protection</h1>
+    <section>
+        <h3>Demo</h3>
+        <ul>
+            <li>
+                <a href="/xss/XSSProtectionOff?user=Frank Sinatra">Example: Frank Sinatra</a>
+            </li>
+            <li>
+                <a href="/xss/XSSProtectionOff?user=test<script>alert('you have been hacked');<%2Fscript>">XSSProtection OFF</a>
+            </li>
+            <li>
+                <a href="/xss/XSSProtectionOn?user=test<script>alert('you have been hacked');<%2Fscript>">XSSProtection ON</a>
+            </li>
+        </ul>
+        </section>
 
-    <ul>
-        <li>
-            <a href="/xss/XSSProtectionOff?user=Frank Sinatra">Example: Frank Sinatra</a>
-        </li>
-        <li>
-            <a href="/xss/XSSProtectionOff?user=test<script>alert('you have been hacked');<%2Fscript>">XSSProtection OFF</a>
-        </li>
-        <li>
-            <a href="/xss/XSSProtectionOn?user=test<script>alert('you have been hacked');<%2Fscript>">XSSProtection ON</a>
-        </li>
-    </ul>    
-
-        
     <article>
-        X-XSS-Protection it enables cross-site scripting (XSS) Filter.
+        <p>X-XSS-Protection it enables cross-site scripting (XSS) Filter.</p>
 
-        Syntax
-        X-XSS-Protection: 0         - Disables XSS filtering.
-        X-XSS-Protection: 1         - Enables XSS filtering (usually default in browsers). If a cross-site scripting attack is detected, the browser will sanitize the page (remove the unsafe parts).
-        X-XSS-Protection: 1; mode=block - Enables XSS filtering. Rather than sanitizing the page, the browser will prevent rendering of the page if an attack is detected.
+        <h5>Syntax</h5>
+        <p>            
+            <dl>
+                <dt>X-XSS-Protection: 0</dt>
+                <dd>Disables XSS filtering.</dd>
+                <dt>X-XSS-Protection: 1</dt>
+                <dd>Enables XSS filtering (usually default in browsers). If a cross-site scripting attack is detected, the browser will sanitize the page (remove the unsafe parts).</dd>
+                <dt>X-XSS-Protection: 1; mode=block</dt>
+                <dd>Enables XSS filtering. Rather than sanitizing the page, the browser will prevent rendering of the page if an attack is detected.</dd>
+            </dl>
+        </p>
+        <p>
+            Some of the browsers retired XSS Filter, it is recomended to use Content-Security-Policy (CSP) without allowing unsafe-inline scripts instead.
+        </p>
 
-        Some of the browsers retired XSS Filter, it is recomended to use Content-Security-Policy (CSP) without allowing unsafe-inline scripts instead.
 
-        Links
-        https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection
+        <h5>Links:</h5>
+        @{
+            var links = new[]
+            {
+            "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection"
+        };
+        }
+
+
+        <ul>
+            @foreach (var link in links)
+            {
+                <li><a href="@link">@link</a></li>
+            }
+        </ul>
 
     </article>

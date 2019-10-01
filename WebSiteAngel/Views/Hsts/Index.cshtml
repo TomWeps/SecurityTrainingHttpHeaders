@@ -1,11 +1,37 @@
 ﻿
 
     <h1>Http Strict-Transport-Security (HSTS)</h1>
-    <ul>
-        <li><a href="http://angel.local/hsts/demo">Demo</a></li>
-        <li><a href="http://angel.local/hsts/redirect">Redirect to HttpS</a></li>
-    </ul>
+    <section>
+        <h3>Demo</h3>
+        <ul>
+            <li><a href="http://angel.local/hsts/demo">Demo</a></li>
+            <li><a href="http://angel.local/hsts/redirect">Redirect to HttpS</a></li>
+        </ul>
+        </section>
+        <article>
+            <h3>Introduction</h3>
+            <p>
+                HTTP Strict Transport Security is an HTTP header that notifies user agents to only connect to a given site over HTTPS, even if the scheme chosen was HTTP. Browsers that have had HSTS set for a given site will transparently upgrade all requests to HTTPS.
+            </p>
+            <h5>protects against:</h5>
+            <ul>
+                <li>SSL protocol attacks (SSL Stripping - 'man in the middle' hack)</li>
+                <li>cookie hijacking</li>
+            </ul>
 
-<article>
+            <h5>Links:</h5>
+            @{
+                var links = new[]
+                {
+            "https://www.makeuseof.com/tag/what-is-hsts/"
+        };
+            }
 
-</article>
+
+            <ul>
+                @foreach (var link in links)
+                {
+                    <li><a href="@link">@link</a></li>
+                }
+            </ul>
+        </article>

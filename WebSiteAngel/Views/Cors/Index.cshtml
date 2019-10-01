@@ -1,44 +1,70 @@
 ﻿
 <h1>Cross-Origin Resource Sharing (CORS)</h1>
 
-<ul>
-    <li><a asp-controller="cors" asp-action="demo">Demo on Angel's Website</a></li>
-    <li><a href="http://devil.local/cors" target="_blank">Demo on Devil's Website</a></li>
-</ul>
+<section> 
+    <h3>Demo</h3>
+    <ul>
+        <li><a asp-controller="cors" asp-action="demo">Demo on Angel's Website</a></li>
+        <li><a href="http://devil.local/cors" target="_blank">Demo on Devil's Website</a></li>
+    </ul>
+</section>
 
 
 <article>
+    <h3>Introduction</h3>
+    <p>
+        <strong>Same-Origin Policy (SOP)</strong> is an important concept in application security that involves a large group of client-side scripting languages.
+        https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy
+    </p>
+    <p>
+        <strong>Cross-Origin Resource Sharing (CORS)</strong> is a mechanism that enables web browsers to perform cross-domain requests using the XMLHttpRequest API in a controlled manner.
+    </p>
 
-    Same-Origin Policy (SOP)
-    An important concept in application security that involves a large group of client-side scripting languages.
-    https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy
+    <h5>Key CORS header</h5>
+    <p>
+        <dl>
+            <dt>Access-Control-Allow-Origin</dt>
+            <dd>specifies which domains can access a domain’s resources. For instance, if requester.com want to access provider.com’s resources, then developers can use this header to securely grant requester.com access to provider.com’s resources.</dd>
+            <dt>Access-Control-Allow-Credentials</dt>
+            <dd>specifies whether or not the browser will send cookies with the request. Cookies will only be sent if the allow-credentials header is set to true.</dd>
+            <dt>Access-Control-Allow-Methods specifies</dt>
+            <dd>which HTTP request methods (GET, PUT, DELETE, etc.) can be used to access resources. This header lets developers further enhance security by specifying what methods are valid when requester.com requests access to provider.com’s resources.</dd>
+        </dl>
+    </p>
 
-    Cross-Origin Resource Sharing(CORS) is a mechanism that enables web browsers to perform cross-domain requests using the XMLHttpRequest API in a controlled manner.
+    <h5>Pitfalls</h5>
+    <ul>
+        <li>Thinking of CORS, like a the Server Side "Access Control List"</li>
+        <li>Victim’s browser as a proxy to bypass IP-based authentication and access intranet application</li>
+        <li>
+            Misconfiguration, examples:
+            <ul>
+                <li>wildcard * operator for Access-Control-Allow-Origin</li>
+                <li>(broken) regex for checking origin header</li>
+                <li>just copying origin</li>
+            </ul>
+        </li>
+        <li>'null' origin</li>
+        <li>Breaking HTTPS (httpS web site, is accepting http origin - man in the middle)</li>
+        <li>Client-Side cache poisoning ( reflected XSS Attack )</li>
+        <li>Server-side cache poisoning ( stored XSS vulnerability )</li>
+    </ul>
 
-    KEY CORS HEADERS
-    Access-Control-Allow-Origin specifies which domains can access a domain’s resources. For instance, if requester.com want to access provider.com’s resources, then developers can use this header to securely grant requester.com access to provider.com’s resources.
-    Access-Control-Allow-Credentials specifies whether or not the browser will send cookies with the request. Cookies will only be sent if the allow-credentials header is set to true.
-    Access-Control-Allow-Methods specifies which HTTP request methods (GET, PUT, DELETE, etc.) can be used to access resources. This header lets developers further enhance security by specifying what methods are valid when requester.com requests access to provider.com’s resources.
-
-    Pitfalls
-    - Thinking of CORS, like a the Server Side "Access Control List"
-    - Victim’s browser as a proxy to bypass IP-based authentication and access intranet application
-    - Misconfiguration (for example:,
-    wildcard * operator for Access-Control-Allow-Origin
-    (broken) regex for checking origin header
-    just copying origin
-    - ‘null’ origin
-    - Breaking HTTPS (httpS web site, is accepting http origin - man in the middle)
-    - Client-Side cache poisoning ( reflected XSS Attack )
-    - Server-side cache poisoning ( stored XSS vulnerability )
-
-
-
-    Links:
-    https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
-    https://portswigger.net/research/exploiting-cors-misconfigurations-for-bitcoins-and-bounties
-    https://ejj.io/misconfigured-cors/
-    https://www.bedefended.com/papers/cors-security-guide
-    https://www.moesif.com/blog/technical/cors/Authoritative-Guide-to-CORS-Cross-Origin-Resource-Sharing-for-REST-APIs/
-
+    <h5>Links:</h5>
+    @{ 
+        var links = new[]
+        {
+            "https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS",
+            "https://portswigger.net/research/exploiting-cors-misconfigurations-for-bitcoins-and-bounties",
+            "https://ejj.io/misconfigured-cors/",
+            "https://www.bedefended.com/papers/cors-security-guide",
+            "https://www.moesif.com/blog/technical/cors/Authoritative-Guide-to-CORS-Cross-Origin-Resource-Sharing-for-REST-APIs/"
+        };
+    }
+<ul>
+    @foreach (var link in links)
+    {
+        <li><a href="@link">@link</a></li>
+    }
+</ul>
 </article>

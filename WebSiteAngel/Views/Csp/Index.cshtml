@@ -1,21 +1,36 @@
 ﻿
 
 <h1>Content Security Policy (CSP)</h1>
-<ul>
-    <li><a asp-controller="Csp" asp-action="Off">Without CSP</a></li>
-    <li><a asp-controller="Csp" asp-action="On">With CSP</a></li>
-</ul>
+<section>
+    <h3>Demo</h3>
+    <ul>
+        <li><a asp-controller="Csp" asp-action="Off">Without CSP</a></li>
+        <li><a asp-controller="Csp" asp-action="On">With CSP</a></li>
+    </ul>
+</section>
 
 <article>
-
+    <h3>Introduction</h3>
     Helps to detect and mitigate certain types of attacks:
-    - Cross Site Scripting (XSS)
-    - Data injection
-    - Packet sniffing (server can specify that all content must be loaded using HTTPS)
+    <ul>
+        <li>Cross Site Scripting (XSS)</li>
+        <li>Data injection</li>
+        <li>Packet sniffing (server can specify that all content must be loaded using HTTPS)</li>
+    </ul>
 
-
-    Links
-    https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
+    <h5>Links:</h5>
+    @{
+        var links = new[]
+        {
+            "https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP"
+        };
+    }
+    <ul>
+        @foreach (var link in links)
+        {
+            <li><a href="@link">@link</a></li>
+        }
+    </ul>
 
 </article>
 
