@@ -3,7 +3,6 @@
     <p><button onclick="authenticateCookie()">Authenticate Cookie</button></p>
     <p><button onclick="getSecret('WithoutCors', false)">Get Secret - WithoutCors</button></p>
     <p><button onclick="getSecret('AllowOriginWildCard', false)">Get Secret - AllowOriginWildCard</button></p>
-    <p><button onclick="getSecret('AllowOriginWildCard', true)">Get Secret - AllowOriginWildCard + WithCredentials</button></p>
     <p><button onclick="getSecret('AllowCredentials', true)">Get Secret - AllowCredentials</button></p>
     <p><button onclick="getSecret('AllowAngelsOnly', true)">Get Secret - AllowAngelsOnly</button></p>
     <div id="content"></div>
@@ -18,6 +17,11 @@
         function showMessage(xhr) {
             var contentElement = document.getElementById('content');
             contentElement.innerHTML = xhr.responseText;
+        }
+
+        function showError(xhr) {
+            var contentElement = document.getElementById('content');
+            contentElement.innerHTML = 'Error';
         }
 
         function authenticateCookie() {
@@ -36,6 +40,12 @@
             xhr.withCredentials = withCredentials;
             xhr.addEventListener('load', function () {
                 showMessage(this);
+            });
+            xhr.addEventListener('error', function () {
+                showError(this);
+            });
+            xhr.addEventListener('abort', function () {
+                showError(this);
             });
             xhr.open('POST', apiUriBase + 'cors/' + actionName);
             xhr.send();
