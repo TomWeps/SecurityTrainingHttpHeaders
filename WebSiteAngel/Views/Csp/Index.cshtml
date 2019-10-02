@@ -1,6 +1,4 @@
-﻿
-
-<h1>Content Security Policy (CSP)</h1>
+﻿<h1>Content Security Policy (CSP)</h1>
 <section>
     <h3>Demo</h3>
     <ul>
@@ -8,16 +6,21 @@
         <li><a asp-controller="Csp" asp-action="On">With CSP</a></li>
     </ul>
 </section>
-
-<article>
-    <h3>Introduction</h3>
-    Helps to detect and mitigate certain types of attacks:
+<hr/>
+<article>    
+    CSP helps to detect and mitigate certain types of attacks:
     <ul>
         <li>Cross Site Scripting (XSS)</li>
         <li>Data injection</li>
         <li>Packet sniffing (server can specify that all content must be loaded using HTTPS)</li>
     </ul>
-
+    <h5>Syntax Examples</h5>
+    <ul>
+        <li>Content-Security-Policy: default-src 'self' *.trusted.com</li>
+        <li>Content-Security-Policy: default-src 'self'; img-src *; media-src media1.com media2.com; script-src userscripts.example.com</li>
+        <li>Content-Security-Policy: default-src https://onlinebanking.jumbobank.com</li>
+        <li>Content-Security-Policy: default-src 'self' *.mailsite.com; img-src *</li>        
+    </ul>
     <h5>Links:</h5>
     @{
         var links = new[]
@@ -31,7 +34,6 @@
             <li><a href="@link">@link</a></li>
         }
     </ul>
-
 </article>
 
 

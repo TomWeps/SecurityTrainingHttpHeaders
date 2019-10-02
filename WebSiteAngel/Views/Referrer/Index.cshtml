@@ -10,14 +10,11 @@
             <a href="http://angel.local/Referrer/NoReferrerPolicy?Key=TopSecret">NoReferrerPolicy</a>
         </li>
     </ul>
-    </section>
-
-<article>
-    <h3>Introduction</h3>
+</section>
+<article>    
     <p>
         When a user navigates to a site via a hyperlink or a website loads an external resource, browsers inform the destination site of the origin of the requests through the use of the HTTP Referer (sic) header. Although this can be useful for a variety of purposes, it can also place the privacy of users at risk. HTTP Referrer Policy allows sites to have fine-grained control over how and when browsers transmit the HTTP Referer header
     </p>
-
     <h5>Links:</h5>
     @{
         var links = new[]
@@ -25,8 +22,6 @@
             "https://infosec.mozilla.org/guidelines/web_security.html#referrer-policy"
         };
     }
-
-
     <ul>
         @foreach (var link in links)
         {
@@ -34,4 +29,4 @@
         }
     </ul>
 </article>
-        
+

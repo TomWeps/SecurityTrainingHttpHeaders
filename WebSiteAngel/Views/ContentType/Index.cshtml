@@ -8,15 +8,12 @@
         <li><a asp-controller="ContentType" asp-action="Example2">Example2</a></li>
     </ul>
 </section>
-
-<article>
-    <h3>Introduction</h3>
+<hr/>
+<article>    
     <p>
         Setting a server's X-Content-Type-Options HTTP response header to nosniff instructs browsers to disable 
         <a href="https://en.wikipedia.org/wiki/Content_sniffing">content or MIME sniffing</a> which is used to override response Content-Type headers to guess and process the data using an implicit content type.
     </p>
-
-
     <h5>nosniff</h5>
     <p>
         Blocks a request if the request destination is of type
@@ -25,7 +22,6 @@
             <li>"script" and the MIME type is not a JavaScript MIME type</li>
         </ul>
     </p>
-
     <p>
         Enables Cross-Origin Read Blocking for the MIME-types
         <ul>
@@ -35,7 +31,6 @@
             <li>text/xml, application/xml or any other type with an XML extension: */*+xml (excluding image/svg+xml)</li>
         </ul>
     </p>
-
     <h5>Protects against:</h5>
     <dl>
         <dt>MIME Confusion Attack</dt>
@@ -43,24 +38,19 @@
         <dt>Unauthorized Hotlinking</dt>
         <dd>By hotlinking to sites with resources for one purpose, e.g. viewing, apps can rely on content-type sniffing and generate a lot of traffic on sites for another purpose where it may be against their terms of service, e.g. GitHub displays JavaScript code for viewing</dd>
     </dl>
-
     <h5>Links:</h5>
-    @{ 
+    @{
         var links = new[]
         {
             "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options",
-    "https://stackoverflow.com/questions/18337630/what-is-x-content-type-options-nosniff",
-    "https://whitton.io/articles/xss-on-facebook-via-png-content-types/"
+            "https://stackoverflow.com/questions/18337630/what-is-x-content-type-options-nosniff",
+            "https://whitton.io/articles/xss-on-facebook-via-png-content-types/"
         };
     }
-    
-
     <ul>
         @foreach (var link in links)
         {
             <li><a href="@link">@link</a></li>
         }
     </ul>
-
-
 </article>

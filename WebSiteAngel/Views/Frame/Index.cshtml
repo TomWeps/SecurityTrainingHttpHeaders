@@ -1,13 +1,13 @@
-﻿
-@{    
-    var uriDeny = @HtmlEncoder.Encode("http://angel.local/frame/XFrameOptionsDeny");
-    var uriNoDeny = @HtmlEncoder.Encode("http://angel.local/frame/XFrameOptionsNoDeny");
-    var uriDevil = "http://devil.local/Clickjacking?dstUri=";
-    var uriExample1 = $"{uriDevil}{uriNoDeny}";
-    var uriExample2 = $"{uriDevil}{uriDeny}";
-}
-
-    <h1>X-Frame-Options</h1>
+﻿<h1>X-Frame-Options</h1>
+<section>
+    <h3>Demo</h3>
+    @{
+        var uriDeny = @HtmlEncoder.Encode("http://angel.local/frame/XFrameOptionsDeny");
+        var uriNoDeny = @HtmlEncoder.Encode("http://angel.local/frame/XFrameOptionsNoDeny");
+        var uriDevil = "http://devil.local/Clickjacking?dstUri=";
+        var uriExample1 = $"{uriDevil}{uriNoDeny}";
+        var uriExample2 = $"{uriDevil}{uriDeny}";
+    }
 
     <ul>
         <li>
@@ -20,10 +20,27 @@
             <a href="@uriExample2" target="_blank">Devil's Page - Example 2</a>
         </li>
     </ul>
-
-    <article>
-
-        Protect against attacks:
-        <a href="https://www.owasp.org/index.php/Clickjacking">Clickjacking</a> attacker tricks users into interacting with your website through a disguised frame
-
-    </article>
+</section>
+<hr />
+<article>
+    <p>The X-Frame-Options HTTP response header can be used to indicate whether or not a browser should be allowed to render a page in a &lt;frame&gt;, &lt;iframe&gt;, &lt;embed&gt; or &lt;object&gt;.</p>
+    <h5>Protect against attacks:</h5>
+    <ul>
+        <li>
+            <a href="https://www.owasp.org/index.php/Clickjacking">Clickjacking</a> attacker tricks users into interacting with your website through a disguised frame
+        </li>
+    </ul>
+    <h5>Links:</h5>
+    @{
+        var links = new[]
+        {
+            "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options"
+        };
+    }
+    <ul>
+        @foreach (var link in links)
+        {
+            <li><a href="@link">@link</a></li>
+        }
+    </ul>
+</article>
