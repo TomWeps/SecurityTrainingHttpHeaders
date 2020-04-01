@@ -1,0 +1,69 @@
+﻿@using WebSiteAngel.Configuration
+@model WebSitesSettings
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Cross-Site Script Inclusion (XSSI)  </h1>
+<p>
+    Browsers prevent pages of one domain from reading pages in other domains (<strong>SOP</strong> – Same Origin Policy).
+    But they do not prevent pages of a domain from referencing resources in other domains.
+    In particular, they allow images ( <strong> @Html.Raw(Html.Encode("<img>")) </strong> tag) to be rendered from other domains
+    and scripts (<strong> @Html.Raw(Html.Encode("<scritp>")) </strong> tag ) to be executed from other domains.
+    It is less known Web Application vulnerability.
+</p>
+<p>
+    <em>Worth to notice</em><br/>
+    An included script doesn't have its own security context. It runs in the security context of the page that included it.
+    <br/>
+    <a href="@($"{Model.DevilUri}/Xssi/SimpleHttpRequest")">Demo: Same Origin Policy</a>
+</p>
+<p>
+    Categories:
+    <ul>
+        <li>
+            Static JavaScript / JSONP (regular XSSI)
+            <div>
+                <a href="@($"{Model.DevilUri}/Xssi/StaticJavaScript")">Demo: Regular XSSI</a>
+            </div>
+        </li>
+        <li>Static JavaScript, which is only accessible when authenticated</li>
+        <li>Dynamic JavaScript</li>
+        <li>
+            Non-JavaScript
+            <div>
+                <a href="@($"{Model.DevilUri}/Xssi/JsonHijacking")">Demo: JsonHijacking</a>
+            </div>
+        </li>
+    </ul>
+    Typical Exploiting XSSI is by using in the js:
+    Global Variables, Function Overriding, Prototype Tampering    
+</p>
+
+
+<h3>Prevention</h3>
+<ul>
+    <li>Never place sensitive content inside JavaScript files or JSONP</li>
+    <li>Correct Http header Content-Type Header</li>
+    <li>X-Content-Type-Options: nosniff </li>
+    <li>Http Header X-Content-Type-Options: nosniff</li>
+    <li>Anti-Cross-Site Request Forgery Token </li>    
+    <li>SameSite Cookie Attribute</li>
+    <li>
+        Prefixing all JSON responses to make them non-executable, by convention, using the well-known string ")]}',\n".
+        <br /><a href="https://angular.io/guide/security#xssi"> Angular Security: Cross-site script inclusion (XSSI)</a>
+    </li>
+</ul>
+
+@{
+    string[] uriList = new[]
+    {
+        "https://www.scip.ch/en/?labs.20160414",
+        "https://www.owasp.org/images/9/9a/20160607-xssi-the_tale_of_a_fameless_but_widepsread_vulnerability-Veit_Hailperin.pdf",
+        "https://portswigger.net/research/json-hijacking-for-the-modern-web",
+        "https://www.owasp.org/images/f/f3/Your_Script_in_My_Page_What_Could_Possibly_Go_Wrong_-_Sebastian_Lekies%2BBen_Stock.pdf",
+        "http://sebastian-lekies.de/leak/"
+    };
+}
+@await Html.PartialAsync("_Resources", uriList)
+

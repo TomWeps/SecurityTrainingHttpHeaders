@@ -1,0 +1,9 @@
+﻿@model XssModel
+
+<form asp-controller="Xss" asp-action="StoredPost" method="post">
+    <input id="dataInput" asp-for="Data" />
+    <button type="submit">Add new post</button>
+</form>
+<em><small>@Html.Raw(Html.Encode("<script>alert('1');</script>"))</small></em>
+
+

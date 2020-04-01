@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "SimpleHttpRequest";
+}
+
+<h1>SimpleHttpRequest</h1>
+
+<button onclick="executeHttpRequest()">Do http request from js</button>
+
+@section Scripts
+ {
+   
+    <script>
+        function executeHttpRequest() {
+
+            const xhr = new XMLHttpRequest();
+            xhr.addEventListener('load', function () {
+                alert(xhr.statusText + ' ' + xhr.responseText);
+            });
+            xhr.addEventListener('error', function () {
+                alert('error');
+            });
+            xhr.addEventListener('abort', function () {
+                alert('abort');
+            });
+            xhr.withCredentials = true;
+            xhr.open('GET', '@($"{Model.AngelUri}/xssi/regularXSSI.js")');
+            xhr.send();
+            return false;
+        }
+
+    </script>
+
+}

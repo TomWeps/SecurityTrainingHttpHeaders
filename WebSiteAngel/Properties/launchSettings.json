@@ -22,6 +22,7 @@
     "WebSiteAngel": {
       "commandName": "Project",
       "launchBrowser": true,
+      "launchUrl": "SameSite",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
@@ -30,7 +31,7 @@
     "IIS": {
       "commandName": "IIS",
       "launchBrowser": true,
-      "launchUrl": "http://angel.local/",
+      "launchUrl": "http://angel.local/second",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

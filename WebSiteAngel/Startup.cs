@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebSiteAngel.Configuration;
 
 namespace WebSiteAngel
 {
@@ -31,7 +32,7 @@ namespace WebSiteAngel
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            services.Configure<WebSitesSettings>(options => Configuration.GetSection("WebSites").Bind(options));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -46,6 +47,12 @@ namespace WebSiteAngel
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+               
+                routes.MapAreaRoute(
+                    name: "HttpHeaders",
+                    areaName: "HttpHeaders",
+                    template: "HttpHeaders/{controller=Home}/{action=Index}/{id?}");
+           
             });
         }
     }

@@ -1,47 +1,78 @@
-﻿
-<h1>X-XSS-Protection</h1>
-<section>
-    <h3>Demo</h3>
-    <ul>
-        <li>
-            <a href="/xss/XSSProtectionOff?user=Frank Sinatra">Example: Frank Sinatra</a>
-        </li>
-        <li>
-            <a href="/xss/XSSProtectionOff?user=test<script>alert('you have been hacked');<%2Fscript>">XSSProtection OFF</a>
-        </li>
-        <li>
-            <a href="/xss/XSSProtectionOn?user=test<script>alert('you have been hacked');<%2Fscript>">XSSProtection ON</a>
-        </li>
-    </ul>
-</section>
-<hr/>
-<article>
-    <p>X-XSS-Protection it enables cross-site scripting (XSS) filter in the Web Browser</p>
-    <p>
-        <em>Some of the browsers (Edge) retired XSS Filter, it is recomended to use Content-Security-Policy (CSP) without allowing unsafe-inline scripts instead.</em>
-    </p>
-    <h5>Syntax</h5>
-    <p>
-        <dl>
-            <dt>X-XSS-Protection: 0</dt>
-            <dd>Disables XSS filtering.</dd>
-            <dt>X-XSS-Protection: 1</dt>
-            <dd>Enables XSS filtering (usually default in browsers). If a cross-site scripting attack is detected, the browser will sanitize the page (remove the unsafe parts).</dd>
-            <dt>X-XSS-Protection: 1; mode=block</dt>
-            <dd>Enables XSS filtering. Rather than sanitizing the page, the browser will prevent rendering of the page if an attack is detected.</dd>
-        </dl>
-    </p>
-    <h5>Links:</h5>
-    @{
-        var links = new[]
-        {
-            "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection"
-        };
-    }
-    <ul>
-        @foreach (var link in links)
-        {
-            <li><a href="@link">@link</a></li>
-        }
-    </ul>
-</article>
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<h1>Cross Site Scripting (XSS)</h1>
+<p>
+    Cross-site scripting (XSS) attacks enable attackers to inject client-side scripts into web pages
+    viewed by other users.
+    It allows an attacker to circumvent the same origin policy,
+    which is designed to segregate different websites from each other.
+    Cross-site scripting vulnerabilities normally allow an attacker to masquerade as a victim user,
+    to carry out any actions that the user is able to perform,
+    and to access any of the user's data.
+    If the victim user has privileged access within the application,
+    then the attacker might be able to gain full control over all of the application's functionality and data.
+</p>
+<object data="xss/cross-site-scripting.svg" type="image/svg+xml"></object>
+
+<h3>Types of XSS Vulnerabilities</h3>
+<ul>
+    <li><a asp-controller="Xss" asp-action="Stored">Stored</a></li>
+    <li><a asp-controller="Xss" asp-action="Reflected">Reflected</a></li>
+    <li><a asp-controller="Xss" asp-action="Dom">DOM</a></li>
+</ul>
+<h3>Injections Examples:</h3>
+<ul>
+    <li><a asp-controller="Xss" asp-action="ExampleHref">Example: Href</a></li>
+    <li><a href="~/xss/xss.svg">Example: SVG</a></li>
+
+    <li><a asp-controller="Xss" asp-action="InjectionTypes">InjectionTypes</a></li>
+</ul>
+<h3>Prevention</h3>
+
+<ul>
+    <li>
+        <strong>Filter input on arrival.</strong> At the point where user input is received, filter as strictly as possible based on what is expected or valid input.
+    </li>
+    <li>
+        <strong>Encode data on output.</strong> At the point where user-controllable data is output in HTTP responses, encode the output to prevent it from being interpreted as active content. Depending on the output context, this might require applying combinations of HTML, URL, JavaScript, and CSS encoding.        
+    </li>
+    <li>
+        <strong>Use appropriate response headers.</strong> To prevent XSS in HTTP responses that aren't intended to contain any HTML or JavaScript, you can use the <code>Content-Type</code> and <code>X-Content-Type-Options</code> headers to ensure that browsers interpret the responses in the way you intend.
+    </li>
+    <li>
+        <strong>Content Security Policy.</strong> As a last line of defense, you can use Content Security Policy (CSP) to reduce the severity of any XSS vulnerabilities that still occur.
+    </li>
+    <li>
+        <strong>Sanitize HTML Markup</strong> with a Library Designed for the Job        
+            <ul>
+                <li><a href="https://github.com/mganss/HtmlSanitizer">.Net HtmlSanitizer</a></li>
+                <li><a href="https://github.com/cure53/DOMPurify">DOMPurify</a></li>
+            </ul>       
+    </li>
+</ul>
+
+<p>
+    <em>Myth</em>
+    Following Character encoding:
+    <div>" quote to @Html.Raw(Html.Encode("&quot;"))</div>
+    <div>' apostrophe to @Html.Raw(Html.Encode("&#39"))</div>
+    <div>characters <> to @Html.Raw(Html.Encode("&lt; and &gt;"))</div>
+    <div> char & is changed to @Html.Raw(Html.Encode("&amp"))</div>
+    It protects against most, but not all possibilities of xss attack
+</p>
+
+@{
+    string[] uriList = new[]
+    {
+        "https://owasp.org/www-community/attacks/xss/",
+        "https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A7-Cross-Site_Scripting_(XSS)",
+        "https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html",
+        "https://www.owasp.org/images/3/32/OWASP_BeNeLux-Day_2017_Bypassing_XSS_mitigations_via_script_gadgets_Sebastian_Lekies.pdf",
+        "https://portswigger.net/web-security/cross-site-scripting",
+        "https://angular.io/guide/security#xss",
+    };
+}
+@await Html.PartialAsync("_Resources", uriList)
+
+

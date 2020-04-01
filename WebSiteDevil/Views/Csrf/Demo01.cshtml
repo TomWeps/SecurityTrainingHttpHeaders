@@ -1,0 +1,42 @@
+﻿@using WebSiteDevil.Configuration
+@model WebSitesSettings
+@{
+    ViewData["Title"] = "Demo01";
+}
+
+<h1>Demo01</h1>
+
+<button onclick="executeDangerOperation('SomeDangerOperationGet','GET')">Execute Danger Operation [GET]</button>
+<button onclick="executeDangerOperation('SomeDangerOperationPost', 'POST')">Execute Danger Operation [POST]</button>
+
+<div id="operationResult"></div>
+
+
+@section Scripts
+{
+    <script>
+        function executeDangerOperation(action, method) {
+
+            const resultTag = document.getElementById('operationResult');
+
+            const xhr = new XMLHttpRequest();
+            xhr.addEventListener('load', function () {
+                result = JSON.parse(xhr.responseText);
+                resultTag.innerText = "Operation " + (result.isAuthenticated ? "successful" : "Error");
+            });
+            xhr.addEventListener('error', function () {
+                resultTag.innerText = "Operation Error";
+            });
+            xhr.addEventListener('abort', function () {
+                resultTag.innerText = "Operation Error";
+            });
+            //xhr.withCredentials = true;
+            xhr.open(method, '@($"{Model.AngelUri}/Csrf/Demo/")'+ action);
+            xhr.setRequestHeader('Accept', 'application/json');
+            xhr.send();
+            return false;
+        }
+
+    </script>
+
+}

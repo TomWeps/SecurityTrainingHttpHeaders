@@ -1,0 +1,30 @@
+﻿@model CsrfForm
+@{
+    ViewData["Title"] = "OtherDangerOperation";
+    bool isAuthenticated = ViewBag.isAuthenticated;
+}
+
+<h1>OtherDangerOperation</h1>
+
+@await Html.PartialAsync("_SessionPanel", isAuthenticated)
+
+@if (isAuthenticated)
+{
+<div>The operation completed successfully</div>
+}
+else 
+{
+<div>The operation failed</div>
+}
+
+Transaction Details:
+<dl>
+    <dt>@Html.LabelFor(m => m.Person)</dt>
+    <dd>@Html.DisplayFor(m => m.Person)</dd>
+    <dt>@Html.LabelFor(m => m.Amount)</dt>
+    <dd>@Html.DisplayFor(m => m.Amount)</dd>
+</dl>
+
+
+
+

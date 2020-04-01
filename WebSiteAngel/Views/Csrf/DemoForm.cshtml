@@ -1,0 +1,17 @@
+﻿@model CsrfForm
+@{
+    ViewData["Title"] = "DemoForm";
+    bool isAuthentication = ViewBag.isAuthenticated;
+}
+
+<h1>DemoForm</h1>
+
+@await Html.PartialAsync("_SessionPanel", isAuthentication)
+
+<form asp-controller="Csrf" asp-action="SomeDangerOperationPost" asp-antiforgery="false" >
+    <label asp-for="Person"></label>
+    <input asp-for="Person" />
+    <label asp-for="Amount"></label>
+    <input asp-for="Amount" />
+    <button type="submit">submit</button>
+</form>

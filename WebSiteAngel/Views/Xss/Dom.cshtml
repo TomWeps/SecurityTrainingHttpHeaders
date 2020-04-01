@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "Dom";
+}
+
+<h1>Dom (Type-0)</h1>
+<p>The vulnerability exists in client-side code rather than server-side code</p>
+
+@{
+    string[] uriList = new[]
+    {
+        "https://owasp.org/www-community/attacks/DOM_Based_XSS"
+    };
+
+    
+}
+
+<div id="imageholder"></div>
+
+@await Html.PartialAsync("_Resources", uriList)
+
+<button onclick="location.hash='usa'">USA</button>
+<button onclick="location.hash='pl'">Poland</button>
+
+hack:
+<div>wrong"%20onerror=alert(%27YouHaveBeenHacked%27)//</div>
+
+
+
+@section Scripts
+{
+    <script type="text/javascript">       
+        window.addEventListener('hashchange', ev => {
+            let lang = unescape(location.hash.slice(1));
+            document.getElementById('imageholder').innerHTML = `<img src="/xss/${lang}.jpg" />`
+        });
+    </script>
+}

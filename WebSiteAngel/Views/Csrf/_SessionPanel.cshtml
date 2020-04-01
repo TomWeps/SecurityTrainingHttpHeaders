@@ -1,0 +1,10 @@
+﻿@model bool
+    <section>
+        <div>
+            Is User Authenticate : @(Model ? "Yes" : "No")
+        </div>
+        <div>
+            <a asp-controller="Csrf" asp-action="Authenticate">Authenticate</a>
+            <a asp-controller="Csrf" asp-action="UnAthenticate">Unauthenticate</a>
+        </div>
+    </section>

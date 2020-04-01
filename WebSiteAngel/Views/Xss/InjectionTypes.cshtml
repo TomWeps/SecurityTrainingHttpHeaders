@@ -1,0 +1,59 @@
+﻿@using WebSiteAngel.Models.Xss
+@model IEnumerable<XssInjection>
+@{
+    ViewData["Title"] = "InjectionTypes";
+}
+
+
+
+<h1>InjectionTypes</h1>
+
+<section>
+    @foreach (var item in Model)
+    {
+        <div>
+            <dl>
+                <dt>Name</dt>
+                <dd><strong>@item.Name</strong></dd>
+                <dt>Injection Place</dt>
+                <dd>@item.HtmlBefore<em>[XSS]</em>@item.HtmlAfter</dd>
+                <dt><a asp-controller="Xss" asp-action="InjectionType" asp-route-id="@item.Id">Injection Example</a></dt>
+                <dd>@item.HtmlBefore @item.Injection @item.HtmlAfter</dd>
+                <dt>Defense</dt>
+                <dd>@item.Defense</dd>
+            </dl>
+        </div>
+    }
+</section>
+
+
+@section Headers
+{
+    <style type="text/css">
+        em {
+            font-style: normal;
+            color: red;
+        }
+
+        dl {
+            border-top: solid;           
+        }
+
+        dl dd {
+            display: inline;
+            margin: 0;
+        }
+
+        dl dd:after {
+            display: block;
+            content: '';
+        }
+
+        dl dt {
+            display: inline-block;
+            min-width: 200px;
+            font-weight: 500;
+        }
+
+    </style>    
+}

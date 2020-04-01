@@ -1,0 +1,42 @@
+﻿@model CsrfModel
+@{
+    ViewData["Title"] = "Demo01";
+    bool isAuthentication = ViewBag.isAuthenticated;
+}
+
+<h1>Demo01</h1>
+
+@await Html.PartialAsync("_SessionPanel", isAuthentication)
+
+<section>
+    <button onclick="executeDangerOperation()">Execute Danger Operation</button>
+    <div id="dangerOperationResult"></div>
+</section>
+
+@section Scripts
+{
+    <script>
+        function executeDangerOperation() {
+
+            const resultTag = document.getElementById('dangerOperationResult');
+
+            const xhr = new XMLHttpRequest();
+            xhr.addEventListener('load', function () {
+                result = JSON.parse(xhr.responseText);
+                resultTag.innerText = "Operation " + (result.isAuthenticated ? "Successful" : "Failed, User Unauthenticated");
+            });
+            xhr.addEventListener('error', function () {
+                resultTag.innerText = "Operation Error";
+            });
+            xhr.addEventListener('abort', function () {
+                resultTag.innerText = "Operation Error";
+            });
+            xhr.open('GET', location.href + '/SomeDangerOperationGet');
+            xhr.setRequestHeader('Accept', 'application/json');
+            xhr.send();
+            return false;
+        }
+
+    </script>
+
+}

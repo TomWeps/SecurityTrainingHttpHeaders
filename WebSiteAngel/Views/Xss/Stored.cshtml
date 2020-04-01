@@ -1,0 +1,17 @@
+﻿@model XssStored
+
+@{
+    ViewData["Title"] = "Stored";
+}
+
+<h1>Stored (Persistent or Type I) </h1>
+<p>The malicious script comes from the website's database</p>
+
+@foreach (var item in Model.Collection)
+{
+    <p>@Html.Raw(item.Data)</p>
+}
+
+@await Html.PartialAsync("StoredForm", Model.New)
+
+

@@ -1,0 +1,20 @@
+﻿@using WebSiteAngel.Models.Xss
+@model XssInjection
+@{
+    ViewData["Title"] = "InjectionType";
+
+    string htmlContnet = string.Concat(Model.HtmlBefore, Model.Injection, Model.HtmlAfter);
+}
+
+@Html.Raw(htmlContnet)
+
+
+@section Scripts
+{
+    <script type="text/javascript">
+        function someFuntcion(arg) {
+           
+        }
+    </script>
+}
+

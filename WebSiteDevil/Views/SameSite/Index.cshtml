@@ -1,0 +1,77 @@
+﻿@using WebSiteDevil.Configuration
+@model WebSitesSettings
+@{
+    ViewData["Title"] = "SameSite Demo";
+}
+
+<h1>SameSite Demo</h1>
+
+<div>
+    Image:
+    <img src="@($"{Model.AngelUri}/SameSite/HasCookieImage")" />
+</div>
+
+<div>
+    <div>IFrame:</div>
+    <iframe src="@($"{Model.AngelUri}/SameSite/HasCookieGet")"></iframe>
+</div>
+
+<div>
+    Http GET Request:
+    <div id="hasCookieGetResult"></div>
+</div>
+<div>
+    Http POST Request:
+    <div id="hasCookiePostResult"></div>
+</div>
+
+<div>
+    Form Get
+    <form action=@($"{Model.AngelUri}/SameSite/HasCookieGet") method="get">
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<div>
+    Form Post
+    <form action=@($"{Model.AngelUri}/SameSite/HasCookiePost") method="post">
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<div>
+    Link:
+    <div><a href="@($"{Model.AngelUri}/SameSite/HasCookieGet")">HasCookie</a></div>
+</div>
+
+
+@section Scripts
+{
+    <script>
+        function runHttpRequest(uri, method, resultTagId) {
+
+            const resultTag = document.getElementById(resultTagId);
+
+            const xhr = new XMLHttpRequest();
+            xhr.addEventListener('load', function () {
+                resultTag.innerText = xhr.responseText;
+            });
+            xhr.addEventListener('error', function () {
+                resultTag.innerText = xhr.responseText;
+            });
+            xhr.addEventListener('abort', function () {
+                resultTag.innerText = xhr.responseText;
+            });
+            xhr.withCredentials = true;
+            xhr.open(method, uri);
+            xhr.send();
+            return false;
+        }
+
+        runHttpRequest('@($"{Model.AngelUri}/SameSite/HasCookieGet")', 'GET', 'hasCookieGetResult');
+        runHttpRequest('@($"{Model.AngelUri}/SameSite/HasCookiePost")', 'POST', 'hasCookiePostResult');
+
+    </script>
+
+}
+

@@ -3,33 +3,71 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebSiteAngel.Models;
+using WebSiteAngel.Models.Xss;
 
 namespace WebSiteAngel.Controllers
 {
     public class XssController : Controller
-    {
+    {       
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult XSSProtectionOff(string user)
+        public IActionResult Reflected([FromQuery] string text)
         {
-            Response.Headers.Add("X-XSS-Protection", "0");
-            return Demo(user);
+            var model = new XssModel
+            {
+                Data = text
+            };
+            return View("Reflected", model);
         }
 
-        public IActionResult XSSProtectionOn(string user)
-        {            
-            Response.Headers.Add("X-XSS-Protection", "1; mode=block");
-            return Demo(user);
-        }
-
-        private IActionResult Demo(string user)
+        [HttpPost]
+        public IActionResult ReflectedPost(XssModel model)
         {
-            ViewData["user"] = user;
-
-            return View("Demo");
+            return RedirectToAction("Reflected", new { text = model.Data } );
         }
+
+        public IActionResult Stored()
+        {
+            var model = new XssStored
+            {
+                Collection = XssPersistence.Items
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult StoredPost(XssModel model)
+        {
+            XssPersistence.Items.Add(model);
+            return View(XssPersistence.Items);
+        }
+
+        public IActionResult Dom()
+        {
+            return View();
+        }
+
+        public IActionResult ExampleHref()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult InjectionTypes()
+        {
+            var result = new XssInjectionsRepository().GetAll();
+            return View(result);
+        }
+
+        public IActionResult InjectionType(int id)
+        {
+            var result = new XssInjectionsRepository().GetById(id);
+            return View(result);
+        }
+
     }
 }

@@ -1,0 +1,19 @@
+﻿@using WebSiteDevil.Configuration
+@model WebSitesSettings
+@{
+    ViewData["Title"] = "StaticJavaScript";
+}
+
+<h1>StaticJavaScript</h1>
+
+@section Headers
+{
+    <script src="@($"{Model.AngelUri}/xssi/regularXSSI.js")"></script>
+}
+
+@section Scripts
+{
+    <script type="text/javascript">
+        alert(JSON.stringify(keys[0]));
+    </script>
+}

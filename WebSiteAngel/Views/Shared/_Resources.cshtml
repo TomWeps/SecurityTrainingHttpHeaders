@@ -1,0 +1,9 @@
+﻿@model IEnumerable<string>
+
+<h3>Resources</h3>
+<ul>
+    @foreach (string uri in Model)
+    {
+        <li><a href="@uri" target="_blank">@uri</a></li>
+    }
+</ul>

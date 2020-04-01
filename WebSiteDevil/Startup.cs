@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebSiteDevil.Configuration;
 
 namespace WebSiteDevil
 {
@@ -31,7 +32,7 @@ namespace WebSiteDevil
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            services.Configure<WebSitesSettings>(options => Configuration.GetSection("WebSites").Bind(options));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

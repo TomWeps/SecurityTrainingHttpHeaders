@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewData["Title"] = "XXE";
+}
+
+<h1>XML External Entity (XXE) Processing</h1>
+<p>
+    The magic behind an XXE attack is that XML specification includes a special annotation for importing external files.
+    This special directive called <em>external entity</em> (<a href="https://www.w3schools.com/xml/xml_dtd.asp">XML DTD</a> ), is interpreted on the machine on which the XML file is evaluated.
+    This means that a specially crafted XML payload sent to a server's XML parser could result in compromising files in that server's file structure
+    <br /> It is kind of SSRF Attack
+</p>
+
+<object data="xxe/xxe-injection.svg" type="image/svg+xml"></object>
+
+<h3>Demo</h3>
+<ul>
+    <li><a asp-controller="Xxe" asp-action="DemoNormal">Example of DTD Transform</a></li>
+    <li><a asp-controller="Xxe" asp-action="DemoHack">Exampled of Hacked Xml File</a></li>
+</ul>
+
+<h3>Prevention</h3>
+<ul>
+    <li>If you don't need, turn the DTP processing off (by default in the newer frameworks)</li>
+    <li><a href="https://docs.microsoft.com/en-us/archive/msdn-magazine/2009/november/xml-denial-of-service-attacks-and-defenses">Microsoft: Security Briefs - XML Denial of Service Attacks and Defenses</a> </li>
+</ul>
+
+@{
+    string[] uriList = new[]
+    {
+        "https://owasp.org/www-community/vulnerabilities/XML_External_Entity_(XXE)_Processing",
+        "https://www.jardinesoftware.net/2016/05/26/xxe-and-net/",
+        "https://docs.microsoft.com/en-us/archive/msdn-magazine/2009/november/xml-denial-of-service-attacks-and-defenses#external-entity-attacks",
+        "https://portswigger.net/web-security/xxe"
+    };
+}
+@await Html.PartialAsync("_Resources", uriList)

@@ -1,12 +1,13 @@
 ﻿
-<div class="text-left">
-    <p><button onclick="authenticateCookie()">Authenticate Cookie</button></p>
-    <p><button onclick="getSecret('WithoutCors', false)">Get Secret - WithoutCors</button></p>
-    <p><button onclick="getSecret('AllowOriginWildCard', false)">Get Secret - AllowOriginWildCard</button></p>
-    <p><button onclick="getSecret('AllowCredentials', true)">Get Secret - AllowCredentials</button></p>
-    <p><button onclick="getSecret('AllowAngelsOnly', true)">Get Secret - AllowAngelsOnly</button></p>
-    <div id="content"></div>
-</div>
+    <div class="text-left">
+        <p><button onclick="authenticateCookie()">Authenticate Cookie</button></p>
+        <p><button onclick="getSecret('WithoutCors', false)">Get Secret - WithoutCors</button></p>
+        <p><button onclick="getSecret('AllowOriginWildCard', false)">Get Secret - AllowOriginWildCard</button></p>
+        <p><button onclick="getSecret('AllowOriginWildCardAndCredentials', true)">Get Secret - AllowOriginWildCardAndCredentials</button></p>
+        <p><button onclick="getSecret('AllowCredentials', true)">Get Secret - AllowCredentials</button></p>
+        <p><button onclick="getSecret('AllowAngelsOnly', true)">Get Secret - AllowAngelsOnly</button></p>
+        <div id="content"></div>
+    </div>
 
 @section Scripts
 {

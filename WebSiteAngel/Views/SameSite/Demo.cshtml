@@ -1,0 +1,91 @@
+﻿<form asp-controller="SameSite" asp-action="Authenticate">
+    Set Cookie's SameSite Flag to:
+    <div>
+        <input type="radio" name="samesite" id="None" value="None" />
+        <label for="None">None</label>
+    </div>
+    <div>
+        <input type="radio" name="samesite" id="Strict" value="Strict">
+        <label for="None">Strict</label>
+    </div>
+    <div>
+        <input type="radio" name="samesite" id="Lax" value="Lax">
+        <label for="None">Lax</label>
+    </div>
+    Or
+    <div>
+        <input type="radio" name="samesite" id="RemoveCookie" value="RemoveCookie">
+        <label for="None">RemoveCookie</label>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+
+<hr />
+
+<div>
+    Image:
+    <img src="/SameSite/HasCookieImage" />
+</div>
+
+<div>
+    <div>IFrame:</div>
+    <iframe src="/SameSite/HasCookieGet"></iframe>
+</div>
+
+<div>
+    Http GET Request:
+    <div id="hasCookieGetResult"></div>
+</div>
+<div>
+    Http POST Request:
+    <div id="hasCookiePostResult"></div>
+</div>
+
+<div>
+    Form Get
+    <form action="/SameSite/HasCookieGet" method="get">
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<div>
+    Form Post
+    <form action="/SameSite/HasCookiePost" method="post">
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<div>
+    Link:
+    <div><a href="/SameSite/HasCookieGet">HasCookie</a></div>
+</div>
+
+
+@section Scripts
+{
+    <script>
+        function runHttpRequest(uri, method, resultTagId) {
+
+            const resultTag = document.getElementById(resultTagId);
+
+            const xhr = new XMLHttpRequest();
+            xhr.addEventListener('load', function () {
+                resultTag.innerText = xhr.responseText;
+            });
+            xhr.addEventListener('error', function () {
+                resultTag.innerText = xhr.responseText;
+            });
+            xhr.addEventListener('abort', function () {
+                resultTag.innerText = xhr.responseText;
+            });
+            xhr.open(method, uri);
+            xhr.send();
+            return false;
+        }
+
+        runHttpRequest('/SameSite/HasCookieGet', 'GET', 'hasCookieGetResult');
+        runHttpRequest('/SameSite/HasCookiePost', 'POST', 'hasCookiePostResult');
+
+    </script>
+
+}

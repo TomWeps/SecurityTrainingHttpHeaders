@@ -1,0 +1,79 @@
+﻿@using WebSiteAngel.Configuration
+@model WebSitesSettings
+@{
+    ViewData["Title"] = "SameSite";
+}
+
+<h1>Cookie's Attribute: SameSite</h1>
+<p>
+    In 2016 Google Chrome introduced a new kind of cookie, the same-site cookie,
+    which can only be sent in requests originating from the same origin as the target domain.
+    This restriction mitigates attacks such as cross-site request forgery (XSRF).
+    A cookie is given this characteristic by setting the SameSite flag to Strict or Lax.
+    <br /><small><em>Wikipedia</em></small>
+</p>
+<p>
+    <table>
+        <tbody>
+            <tr style="height: 15px;">
+                <td style="width: 129px; height: 15px;"><strong>Request Type</strong></td>
+                <td style="width: 347.417px; height: 15px;"><strong>Example Code</strong></td>
+                <td style="width: 226.583px; height: 15px;"><strong>Cookies sent</strong></td>
+            </tr>
+            <tr style="height: 15px;">
+                <td style="width: 129px; height: 15px;">Link</td>
+                <td style="width: 347.417px; height: 15px;"><span>&lt;a href="..."&gt;&lt;/a&gt;</span></td>
+                <td style="width: 226.583px; height: 15px;">Normal, Lax</td>
+            </tr>
+            <tr style="height: 15px;">
+                <td style="width: 129px; height: 15px;">Perender</td>
+                <td style="width: 347.417px; height: 15px;"><span>&lt;link rel="prerender" href=".."/&gt;</span></td>
+                <td style="width: 226.583px; height: 15px;">Normal, Lax</td>
+            </tr>
+            <tr style="height: 15px;">
+                <td style="width: 129px; height: 15px;">Form GET</td>
+                <td style="width: 347.417px; height: 15px;"><span>&lt;form method="GET" action="..."&gt;</span></td>
+                <td style="width: 226.583px; height: 15px;">Normal, Lax</td>
+            </tr>
+            <tr style="height: 15px;">
+                <td style="width: 129px; height: 15px;">Form POST</td>
+                <td style="width: 347.417px; height: 15px;"><span>&lt;form method="POST" action="..."&gt;</span></td>
+                <td style="width: 226.583px; height: 15px;">Normal</td>
+            </tr>
+            <tr style="height: 15px;">
+                <td style="width: 129px; height: 15px;">iframe</td>
+                <td style="width: 347.417px; height: 15px;"><span>&lt;iframe src="..."&gt;&lt;/iframe&gt;</span></td>
+                <td style="width: 226.583px; height: 15px;">Normal</td>
+            </tr>
+            <tr style="height: 15.3333px;">
+                <td style="width: 129px; height: 15.3333px;">AJAX</td>
+                <td style="width: 347.417px; height: 15.3333px;"><span>$.get("...")</span></td>
+                <td style="width: 226.583px; height: 15.3333px;">Normal</td>
+            </tr>
+            <tr style="height: 15px;">
+                <td style="width: 129px; height: 15px;">Image</td>
+                <td style="width: 347.417px; height: 15px;"><span>&lt;img src="..."&gt;</span></td>
+                <td style="width: 226.583px; height: 15px;">Normal</td>
+            </tr>
+        </tbody>
+    </table>
+    <small><em>Source: <a href="https://www.netsparker.com/blog/web-security/same-site-cookie-attribute-prevent-cross-site-request-forgery/">https://www.netsparker.com/blog/web-security/same-site-cookie-attribute-prevent-cross-site-request-forgery/</a></em></small>
+</p>
+
+<h3>Demo</h3>
+<ul>
+    <li><a asp-controller="SameSite" asp-action="Demo">Playground@@Angel</a></li>
+    <li><a href="@($"{Model.DevilUri}/SameSite")">Playground@@Devil</a></li>
+</ul>
+
+
+@{
+    string[] uriList = new[]
+    {
+    "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie",
+    "https://caniuse.com/#feat=same-site-cookie-attribute",
+    "https://web.dev/samesite-cookies-explained/",
+    "https://www.netsparker.com/blog/web-security/same-site-cookie-attribute-prevent-cross-site-request-forgery/"
+    };
+}
+@await Html.PartialAsync("_Resources", uriList)

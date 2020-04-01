@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{F3E8FF5F-5789-4C71-BDE3-8E85865B68A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSiteDevil", "WebSiteDevil\WebSiteDevil.csproj", "{F2BAA774-FCE7-4C2A-A8BB-DC270C2787B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSiteDevil", "WebSiteDevil\WebSiteDevil.csproj", "{F2BAA774-FCE7-4C2A-A8BB-DC270C2787B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSiteAngel", "WebSiteAngel\WebSiteAngel.csproj", "{57521DDE-BDB9-4AED-A91F-37376C1E9A63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSiteAngel", "WebSiteAngel\WebSiteAngel.csproj", "{57521DDE-BDB9-4AED-A91F-37376C1E9A63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

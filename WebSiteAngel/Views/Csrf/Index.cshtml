@@ -1,0 +1,79 @@
+﻿@using WebSiteAngel.Configuration
+@model WebSitesSettings
+@{
+    ViewData["Title"] = "CSRF";
+}
+
+<h1>Cross-Site Request Forgery (CSRF)</h1>
+<p>Synonyms: XSRF, session riding, one-click attack</p>
+<p>
+    Cross-Site Request Forgery (CSRF) is an attack that forces an end user to execute unwanted actions 
+    on a web application in which they’re currently authenticated. 
+    CSRF attacks specifically target state-changing requests, not theft of data, 
+    since the attacker has no way to see the response to the forged request. 
+    With a little help of social engineering (such as sending a link via email or chat), 
+    an attacker may trick the users of a web application into executing actions of the attacker’s choosing. 
+    If the victim is a normal user, a successful CSRF attack can force the user to 
+    perform state changing requests like transferring funds, changing their email address, and so forth. 
+    If the victim is an administrative account, CSRF can compromise the entire web application.
+</p>
+<object data="csrf/cross-site request forgery.svg" type="image/svg+xml"></object>
+
+<h3>Demo</h3>
+<ul>
+    <li><a asp-controller="Csrf" asp-action="Demo">Demo Get: Origin App </a></li>
+    <li><a href="@($"{Model.DevilUri}/csrf/Demo02")">Demo Get: Hacker App</a></li>
+    
+    <li><a asp-controller="Csrf" asp-action="DemoForm">Demo Post: Origin App</a></li>
+    <li><a href="@($"{Model.DevilUri}/csrf/Demo03")">Demo Post: Hacker App</a></li>
+    
+    <li><a asp-controller="Csrf" asp-action="DemoPreventionToken">Demo CSRF Token: Origin App</a></li>
+    <li><a href="@($"{Model.DevilUri}/csrf/Demo04")">Demo CSRF Token: Hacker App</a></li>
+
+    @*
+        <li><a href="@($"{Model.DevilUri}/csrf/Demo01")">Demo Cors</a></li>
+    *@
+</ul>
+
+<h3>Prevention</h3>
+<ul>
+    <li>Use framework built-in CSRF protection (CSRF Tokens)</li>
+    <li>Use SameSite Cookie Attribute for session cookies</li>
+    <li>For sensitive operations consider to use additional 'user interaction based protection'
+        <p><ul>
+        <li>Re-Authentication (password or stronger)</li>
+        <li>One-time Token</li>
+        <li>CAPTCHA</li>
+    </ul></p>
+    </li>
+    <li>Do not use GET requests for state changing operations
+    <p><small>If for any reason you do it, you have to also protect those resources against CSRF</small></p>
+    </li>
+    <li>
+        Http Headers
+        <p>
+            <ul>
+                <li>
+                    <a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html#use-of-custom-request-headers">Use of Custom Request Headers</a>
+                </li>
+                <li>
+                    <a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html#verifying-origin-with-standard-headers">Verifying Origin With Standard Headers</a>
+                </li>
+            </ul>
+        </p>
+    </li>
+        
+    
+</ul>
+
+
+@{
+    string[] uriList = new[]
+    {
+        "https://owasp.org/www-community/attacks/csrf",
+        "https://portswigger.net/web-security/csrf",
+        "https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html",
+        "https://angular.io/guide/security#xsrf"
+    };
+}
+@await Html.PartialAsync("_Resources", uriList)

@@ -1,0 +1,25 @@
+﻿@model XssModel
+@{
+    ViewData["Title"] = "Reflected";
+}
+
+<h1>Reflected(Non-Persistent or Type II)</h1>
+<p>The malicious script comes from the current HTTP request</p>
+
+
+@if (string.IsNullOrWhiteSpace(Model.Data))
+{
+    <p>
+        <form asp-controller="Xss" asp-action="ReflectedPost" method="post">
+            say something...
+            <input asp-for="Data" />
+            <button type="submit">Ok</button>
+        </form>
+    </p>
+    <a asp-controller="Xss" asp-action="Reflected" asp-route-text="<script>alert('You have been hacked');</script>">Hacker link</a>
+}
+else
+{
+    <p> You said @Html.Raw(Model.Data) </p>
+
+}

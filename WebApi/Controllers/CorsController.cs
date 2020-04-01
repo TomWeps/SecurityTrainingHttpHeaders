@@ -35,6 +35,20 @@ namespace WebApi.Controllers
             return Ok("SecretValue - AllowOriginWildCard");
         }
 
+        [HttpPost(template: nameof(AllowOriginWildCardAndCredentials))]
+        public ActionResult<string> AllowOriginWildCardAndCredentials()
+        {
+            Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            Response.Headers.Add("Access-Control-Allow-Credentials", "true");
+
+            if (AuthHelper.IsAuthenticated(Request))
+            {
+                return Ok("SecretValue - AllowOriginWildCard");
+            }
+
+            return Unauthorized("Unauthorized");
+        }
+
         [HttpPost(template: nameof(AllowCredentials))]
         public ActionResult<string> AllowCredentials()
         {

@@ -1,0 +1,12 @@
+﻿<div>
+   @Html.Raw(@Html.Encode("<a href=\"[XSS]\">link</a>"))
+</div>
+<div>
+    @Html.Raw(@Html.Encode("<a href=\"javascript:alert(1)\">link</a>"))
+</div>
+<a href="javascript:alert('you have been hacked')">link</a>
+
+@{ string xss = "javascript:alert(1)"; }
+@*
+<a href="@xss">link 2</a>
+*@
